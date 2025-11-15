@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Quote Calculator — Lilitha Mhle</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Hide extra images that might appear below footer */
+    body > img,
+    body > div > img {
+      display: none !important;
+    }
+
+    /* Quote Calculator Specific Styles */
+    .quote-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .quote-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .quote-header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .quote-header p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    .step-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--glassmorphism-bg);
+      border: 1px solid var(--glassmorphism-border);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .progress-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 40px;
+    }
+
+    .progress-step {
+      flex: 1;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      transition: var(--transition);
+    }
+
+    .progress-step.active {
+      background: var(--primary-accent);
+    }
+
+    .quote-form {
+      background: var(--glassmorphism-bg);
+      border: 1px solid var(--glassmorphism-border);
+      backdrop-filter: blur(12px);
+      padding: 40px;
+      border-radius: 16px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 640px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glassmorphism-border);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-family: var(--font-secondary);
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--primary-accent);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: var(--text-secondary);
+      opacity: 0.6;
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    /* Fix for dropdown text visibility */
+    .form-select option {
+      background: #1a1a1a;
+      color: #ffffff;
+      padding: 12px;
+    }
+
+    .form-select option:hover {
+      background: var(--primary-accent);
+    }
+
+    .form-select option:checked {
+      background: var(--primary-accent);
+      color: #ffffff;
+    }
+
+    .estimate-box {
+      background: linear-gradient(135deg, rgba(241, 92, 53, 0.1), transparent);
+      border: 1px solid rgba(241, 92, 53, 0.3);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .estimate-label {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+
+    .estimate-amount {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-accent);
+    }
+
+    .quote-summary {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .quote-summary h3 {
+      color: var(--text-primary);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 640px) {
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .summary-item {
+      margin-bottom: 12px;
+    }
+
+    .summary-label {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+    }
+
+    .summary-value {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .summary-value.highlight {
+      color: var(--primary-accent);
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: var(--primary-accent);
+      color: #fff;
+      flex: 1;
+      box-shadow: 0 0 20px rgba(241, 92, 53, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(241, 92, 53, 0.6);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-secondary {
+      background: var(--glassmorphism-bg);
+      border: 1px solid var(--glassmorphism-border);
+      color: var(--text-primary);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .success-container {
+      text-align: center;
+      padding: 60px 40px;
+    }
+
+    .success-icon {
+      font-size: 5rem;
+      margin-bottom: 24px;
+    }
+
+    .success-container h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    .success-container p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: 32px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <div class="nav-branding">
+        <img src="https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/581421538_838674275308054_6728775058842624846_n.jpg?stp=c0.169.1024.1024a_dst-jpg_s565x565_tt6&_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=cSB9G28asm8Q7kNvwGK5m4b&_nc_oc=AdnIohBiVRY5hbKg9eU1VlocxLQHyIiA_c14iLbYeBXc1Es3aGe7sa1fnGPEWe6kNmo&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=a_RnniLmURYBWc5xkHOYpw&oh=00_Afhwn33sH7pFbUGKLTwe1-JaMJDF1mwOUkXLOOKhCtmXmw&oe=691CC10B" alt="Logo">
+        <div>
+          <div class="nav-logo">Lilitha Mhle</div>
+          <div class="nav-slogan">where curiosity meets code &lt;&gt;</div>
+        </div>
+      </div>
+
+      <ul class="nav-menu" role="menubar">
+        <li><a class="nav-link" href="index.html">Home</a></li>
+        <li><a class="nav-link" href="about.html">About</a></li>
+        <li><a class="nav-link" href="projects.html">Projects</a></li>
+        <li><a class="nav-link" href="skills.html">Skills</a></li>
+        <li><a class="nav-link" href="services.html">Services</a></li>
+        <li><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="nav-profile" title="Profile icon">
+          <img src="https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/582800360_838055742036574_7301026098191671709_n.jpg?stp=c0.77.864.864a_dst-jpg_s565x565_tt6&_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=N2Wv98efRysQ7kNvwE-dBJS&_nc_oc=Admwdsz9J4sJnff3Ho_K26BgjkdhyUeDaKIToRzZAAZxNKiswGK47spgIJ3aowxomkM&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=7vNUWuG1mCd2JXkoxDlZrQ&oh=00_Afg9p0dwuTTOHmpy5itXgugCxLUu7QYWNrXBSCmbdebyzQ&oe=691BB26C" alt="profile icon">
+        </div>
+        <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="quote-container">
+      <!-- Header -->
+      <div class="quote-header">
+        <div class="step-indicator">
+          <span>📊</span>
+          <span id="stepIndicator">Step 1 of 2</span>
+        </div>
+        <h1>Project <span style="color: var(--primary-accent);">Quote Calculator</span></h1>
+        <p id="stepDescription">Tell me about your project and get an instant estimate</p>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="progress-bar" id="progressBar">
+        <div class="progress-step active"></div>
+        <div class="progress-step"></div>
+      </div>
+
+      <!-- Step 1: Basic Information -->
+      <div id="step1" class="quote-form">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Full Name *</label>
+            <input type="text" id="fullName" class="form-input" placeholder="John Doe" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Email Address *</label>
+            <input type="email" id="email" class="form-input" placeholder="john@example.com" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" id="phone" class="form-input" placeholder="+27 12 345 6789">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Company (Optional)</label>
+            <input type="text" id="company" class="form-input" placeholder="Your Company">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Project Type *</label>
+          <select id="projectType" class="form-select" required>
+            <option value="">Select project type</option>
+            <option value="Business Profile">Business Profile</option>
+            <option value="Portfolio Website">Portfolio Website</option>
+            <option value="WordPress/Shopify Site">WordPress/Shopify Site</option>
+            <option value="Logo Design">Logo Design</option>
+            <option value="UI/UX Design">UI/UX Design</option>
+            <option value="Web Application">Web Application</option>
+            <option value="Mobile App">Mobile App</option>
+            <option value="Hybrid App">Hybrid App</option>
+            <option value="Chatbot">Chatbot Development</option>
+            <option value="CRM System">CRM System</option>
+            <option value="E-commerce Platform">E-commerce Platform</option>
+            <option value="Booking System">Booking & Reservation System</option>
+            <option value="Inventory Management">Inventory Management</option>
+            <option value="Business Automation">Business Automation</option>
+            <option value="Desktop Application">Desktop App/Business Tools</option>
+            <option value="Marketplace">Marketplace Development</option>
+            <option value="Social Network">Social Network Platform</option>
+            <option value="LMS">Learning Management System</option>
+            <option value="Cloud Solution">Cloud Solutions</option>
+            <option value="AI Integration">AI Integration</option>
+            <option value="Custom API">Custom API Development</option>
+            <option value="Real-time System">Real-time Systems</option>
+          </select>
+        </div>
+
+        <div id="estimateBox" class="estimate-box hidden">
+          <div>
+            <div class="estimate-label">Estimated Cost</div>
+            <div class="estimate-amount" id="estimatedCost">Select a project type</div>
+          </div>
+          <span style="font-size: 3rem; opacity: 0.3;">📊</span>
+        </div>
+
+        <button onclick="goToStep2()" class="btn btn-primary" style="width: 100%; margin-top: 20px;">
+          Continue with Quote
+          <span>→</span>
+        </button>
+      </div>
+
+      <!-- Step 2: Finalize Quote -->
+      <div id="step2" class="quote-form hidden">
+        <div class="quote-summary">
+          <h3>Quote Summary</h3>
+          <div class="summary-grid">
+            <div class="summary-item">
+              <div class="summary-label">Name</div>
+              <div class="summary-value" id="summaryName"></div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-label">Email</div>
+              <div class="summary-value" id="summaryEmail"></div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-label">Project Type</div>
+              <div class="summary-value" id="summaryProject"></div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-label">Estimated Cost</div>
+              <div class="summary-value highlight" id="summaryCost"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Preferred Start Date</label>
+          <input type="date" id="startDate" class="form-input">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Additional Notes</label>
+          <textarea id="notes" class="form-textarea" placeholder="Tell me more about your project requirements, goals, or any specific features you need..."></textarea>
+        </div>
+
+        <div class="button-group">
+          <button onclick="goToStep1()" class="btn btn-secondary">
+            <span>←</span>
+            Back
+          </button>
+          <button onclick="submitQuote()" id="submitBtn" class="btn btn-primary">
+            Submit Quote Request
+            <span>→</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 3: Success -->
+      <div id="step3" class="quote-form hidden">
+        <div class="success-container">
+          <div class="success-icon">✅</div>
+          <h2>Quote Request Received!</h2>
+          <p>Thank you for your interest! I've received your quote request and will review it carefully. I'll get back to you within 24-48 hours with a detailed proposal.</p>
+          <div class="button-group" style="justify-content: center;">
+            <a href="index.html" class="btn btn-primary">
+              Back to Home
+            </a>
+            <a href="projects.html" class="btn btn-secondary">
+              View My Projects
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FLOATS -->
+  <a href="quoteCalculator.html" class="getquote-float" title="Get Quote">Get Quote</a>
+  <a href="https://wa.me/27785323540" class="whatsapp-float" target="_blank" title="Let's Chat" aria-label="WhatsApp">
+    <svg viewBox="0 0 32 32" width="32" height="32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <circle cx="16" cy="16" r="15" fill="#25D366"/>
+      <path fill="#fff" d="M20.5 18.4c-.49-.24-2.95-1.45-3.38-1.61-.43-.16-.73-.24-.98.25-.25.49-.98 1.57-1.18 1.9-.2.33-.4.36-.78.13-.38-.23-1.6-.63-2.34-1.86-.79-1.35-1.05-2.6-1.17-2.9-.12-.31-.01-.48.11-.61.12-.13.29-.33.44-.49-.15-.16.18-.26.27-.43.09-.17.04-.31-.02-.44-.06-.13-.65-1.78-.89-2.42-.24-.63-.47-.55-.66-.56-.19-.01-.42-.01-.66-.01-.24 0-.57.09-.86.48-.29.39-1.07 1.33-1.07 3.23 0 1.9 1.25 3.74 1.38 3.98.13.24 2.18 3.19 5.2 4.46.72.3 1.28.46 1.72.58.73.24 1.42.21 1.96.12.48-.08 1.5-.64 1.71-1.26.21-.62.21-1.15.15-1.26-.06-.11-.22-.18-.45-.31z"/>
+    </svg>
+  </a>
+
+  <script>
+    const projectPrices = {
+      "Business Profile": "R1,000 - R2,500",
+      "Portfolio Website": "R1,500 - R3,500",
+      "WordPress/Shopify Site": "R2,000 - R5,000",
+      "Logo Design": "R500 - R2,000",
+      "UI/UX Design": "R2,000 - R5,000",
+      "Web Application": "R5,000 - R15,000",
+      "Mobile App": "R8,000 - R20,000",
+      "Hybrid App": "R6,000 - R15,000",
+      "Chatbot": "R3,000 - R8,000",
+      "CRM System": "R10,000 - R25,000",
+      "E-commerce Platform": "R8,000 - R20,000",
+      "Booking System": "R5,000 - R12,000",
+      "Inventory Management": "R4,000 - R10,000",
+      "Business Automation": "R3,500 - R12,000",
+      "Desktop Application": "R15,000 - R40,000",
+      "Marketplace": "R20,000 - R50,000",
+      "Social Network": "R25,000 - R60,000",
+      "LMS": "R15,000 - R35,000",
+      "Cloud Solution": "R20,000+",
+      "AI Integration": "R15,000+",
+      "Custom API": "R10,000 - R25,000",
+      "Real-time System": "R15,000 - R35,000"
+    };
+
+    // Update estimated cost when project type changes
+    document.getElementById('projectType').addEventListener('change', function() {
+      const selectedType = this.value;
+      const estimateBox = document.getElementById('estimateBox');
+      const estimatedCost = document.getElementById('estimatedCost');
+
+      if (selectedType && projectPrices[selectedType]) {
+        estimatedCost.textContent = projectPrices[selectedType];
+        estimateBox.classList.remove('hidden');
+      } else {
+        estimateBox.classList.add('hidden');
+      }
+    });
+
+    function goToStep2() {
+      const fullName = document.getElementById('fullName').value;
+      const email = document.getElementById('email').value;
+      const projectType = document.getElementById('projectType').value;
+
+      if (!fullName || !email || !projectType) {
+        alert('Please fill in all required fields');
+        return;
+      }
+
+      // Update summary
+      document.getElementById('summaryName').textContent = fullName;
+      document.getElementById('summaryEmail').textContent = email;
+      document.getElementById('summaryProject').textContent = projectType;
+      document.getElementById('summaryCost').textContent = projectPrices[projectType];
+
+      // Update UI
+      document.getElementById('step1').classList.add('hidden');
+      document.getElementById('step2').classList.remove('hidden');
+      document.getElementById('stepIndicator').textContent = 'Step 2 of 2';
+      document.getElementById('stepDescription').textContent = 'Review your quote and provide additional details';
+      document.querySelectorAll('.progress-step')[1].classList.add('active');
+    }
+
+    function goToStep1() {
+      document.getElementById('step2').classList.add('hidden');
+      document.getElementById('step1').classList.remove('hidden');
+      document.getElementById('stepIndicator').textContent = 'Step 1 of 2';
+      document.getElementById('stepDescription').textContent = 'Tell me about your project and get an instant estimate';
+      document.querySelectorAll('.progress-step')[1].classList.remove('active');
+    }
+
+    function submitQuote() {
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+
+      const formData = {
+        fullName: document.getElementById('fullName').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value || 'Not provided',
+        company: document.getElementById('company').value || 'Not provided',
+        projectType: document.getElementById('projectType').value,
+        estimatedCost: projectPrices[document.getElementById('projectType').value],
+        startDate: document.getElementById('startDate').value || 'Not specified',
+        notes: document.getElementById('notes').value || 'No additional notes'
+      };
+
+      // Create mailto link with all the information
+      const subject = encodeURIComponent(`🎯 New Quote Request - ${formData.projectType}`);
+      const body = encodeURIComponent(`
+New Quote Request Received!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CLIENT DETAILS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Name:     ${formData.fullName}
+Email:    ${formData.email}
+Phone:    ${formData.phone}
+Company:  ${formData.company}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PROJECT DETAILS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Type:           ${formData.projectType}
+Estimated Cost: ${formData.estimatedCost}
+Start Date:     ${formData.startDate}
+
+ADDITIONAL NOTES:
+${formData.notes}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      `);
+
+      // Open email client
+      window.location.href = `mailto:mhlelilitha@gmail.com?subject=${subject}&body=${body}`;
+
+      // Show success screen after a short delay
+      setTimeout(() => {
+        document.getElementById('step2').classList.add('hidden');
+        document.getElementById('step3').classList.remove('hidden');
+        document.getElementById('progressBar').style.display = 'none';
+        document.getElementById('stepIndicator').style.display = 'none';
+        document.getElementById('stepDescription').textContent = "Thank you! I'll be in touch soon";
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Submit Quote Request <span>→</span>';
+      }, 1000);
+    }
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
