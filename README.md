@@ -45,12 +45,8 @@ A modern, responsive portfolio website showcasing my skills, projects, and servi
 1. **Clone the repository**
    ```bash
    git clone https://github.com/LilithaMhle/LilithaMhlePortfolio.git
-Open in browser
 
-bash
-cd LilithaMhlePortfolio
-# Open index.html in your preferred browser
-📞 Connect With Me
+##📞 Connect With Me
 Email: mhlelilitha@gmail.com
 
 LinkedIn: Lilitha Mhle
@@ -59,7 +55,7 @@ GitHub: LilithaMhle
 
 WhatsApp: +27 78 532 3540
 
-💼 Services Offered
+##💼 Services Offered
 💻 Web Development (Frontend & Backend)
 
 📱 Mobile App Development
@@ -74,12 +70,12 @@ WhatsApp: +27 78 532 3540
 
 🔧 Business Automation
 
-📊 Project Stats
+##📊 Project Stats
 https://img.shields.io/github/repo-size/LilithaMhle/LilithaMhlePortfolio
 https://img.shields.io/github/last-commit/LilithaMhle/LilithaMhlePortfolio
 https://img.shields.io/badge/GitHub%2520Pages-Live-brightgreen
 
-🌐 Live Demo
+##🌐 Live Demo
 🔗 Portfolio Website: https://LilithaMhle.github.io/LilithaMhlePortfolio
 
 ⭐ If you find this portfolio helpful, please give it a star!
