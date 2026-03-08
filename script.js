@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const preview = document.createElement('div');
     preview.className = 'getquote-preview';
     const img = document.createElement('img');
-    img.src = 'https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/582800360_838055742036574_7301026098191671709_n.jpg?stp=c0.77.864.864a_dst-jpg_s565x565_tt6&_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=N2Wv98efRysQ7kNvwE-dBJS&_nc_oc=Admwdsz9J4sJnff3Ho_K26BgjkdhyUeDaKIToRzZAAZxNKiswGK47spgIJ3aowxomkM&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=7vNUWuG1mCd2JXkoxDlZrQ&oh=00_Afg9p0dwuTTOHmpy5itXgugCxLUu7QYWNrXBSCmbdebyzQ&oe=691BB26C';
+    img.src = 'https://res.cloudinary.com/dfvudlvl7/image/upload/v1772967107/WhatsApp_Image_2025-10-11_at_11.55.43_tafuog.jpg';
     img.alt = 'Profile preview';
     preview.appendChild(img);
     document.body.appendChild(preview);
