@@ -54,8 +54,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const hamburger = document.querySelector('.hamburger');
   const body = document.body;
   if (hamburger) {
-    hamburger.addEventListener('click', () => body.classList.toggle('nav-open'));
+    hamburger.addEventListener('click', () => {
+      body.classList.toggle('nav-open');
+      const isOpen = body.classList.contains('nav-open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
   }
+
+  // Close mobile menu when clicking a nav link
+  const navLinks = document.querySelectorAll('.nav-link');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      body.classList.remove('nav-open');
+    });
+  });
+
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!hamburger.contains(e.target) && !document.querySelector('.nav-menu').contains(e.target)) {
+      body.classList.remove('nav-open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
+  });
 
   // ensure .getquote-float always labelled correctly
   document.querySelectorAll('.getquote-float').forEach(el => el.textContent = 'Get Quote');

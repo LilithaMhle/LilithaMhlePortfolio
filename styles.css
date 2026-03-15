@@ -69,6 +69,7 @@ main {
   justify-content: space-between;
   align-items: center;
   gap: 20px;
+  position: relative;
 }
 
 .nav-branding {
@@ -899,6 +900,46 @@ main {
 
   .hamburger {
     display: flex;
+  }
+
+  body.nav-open .nav-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--dark-bg);
+    padding: 20px;
+    gap: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    border-top: 1px solid var(--glassmorphism-border);
+  }
+
+  body.nav-open .nav-menu li {
+    text-align: center;
+  }
+
+  body.nav-open .nav-menu .nav-link {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  body.nav-open .nav-menu .nav-link:last-child {
+    border-bottom: none;
+  }
+
+  /* Hamburger animation to X */
+  body.nav-open .hamburger span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+  }
+
+  body.nav-open .hamburger span:nth-child(2) {
+    opacity: 0;
+  }
+
+  body.nav-open .hamburger span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
   }
 
   .portfolio-bookmark {
