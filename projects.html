@@ -6,9 +6,99 @@
   <title>Projects — Lilitha Mhle</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 20px;
+      background: rgba(34,197,94,0.12);
+      border: 1px solid rgba(34,197,94,0.35);
+      color: #22c55e;
+      margin-bottom: 10px;
+      letter-spacing: 0.3px;
+      width: fit-content;
+    }
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: liveblink 1.8s infinite;
+      flex-shrink: 0;
+    }
+    @keyframes liveblink {
+      0%,49%  { opacity: 1; }
+      50%,100% { opacity: 0.25; }
+    }
+    .proj-thumb {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      border-radius: 12px 12px 0 0;
+    }
+    .proj-card {
+      background: var(--glassmorphism-bg);
+      border: 1px solid var(--glassmorphism-border);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      text-decoration: none;
+    }
+    .proj-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(241,92,53,0.22);
+      border-color: var(--primary-accent);
+    }
+    .proj-body {
+      padding: 20px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .proj-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0 0 8px;
+      font-family: var(--font-primary);
+    }
+    .proj-desc {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 0 0 16px;
+      flex: 1;
+    }
+    .proj-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary-accent);
+      text-decoration: none;
+    }
+    .proj-link svg {
+      transition: transform 0.2s ease;
+    }
+    .proj-card:hover .proj-link svg {
+      transform: translateX(4px);
+    }
+  </style>
 </head>
 <body>
-  <!-- HEADER: identical to index -->
+
+  <!-- NAVBAR -->
   <nav class="navbar" role="navigation" aria-label="Main navigation">
     <div class="nav-container">
       <div class="nav-branding">
@@ -39,85 +129,143 @@
     </div>
   </nav>
 
-  <main style="padding-top: 100px;">
+  <main style="padding-top:100px;">
     <div style="max-width:1100px;margin:0 auto;padding:20px;">
 
       <!-- PAGE TITLE -->
       <section style="margin-bottom:60px;text-align:center;">
         <h1 style="font-size:2.8rem;margin:0 0 8px 0;color:var(--text-primary);">My Projects & Platforms</h1>
         <div style="width:80px;height:3px;background:var(--primary-accent);margin:16px auto;border-radius:2px;"></div>
+        <p style="color:var(--text-secondary);font-size:0.95rem;margin-top:12px;">Live projects — click any card to visit the app</p>
       </section>
 
-      <!-- PROJECTS GRID -->
-      <section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-bottom:60px;">
+      <!-- LIVE PROJECTS GRID -->
+      <section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;margin-bottom:80px;">
 
-        <!-- Card 1: Sentiment App -->
-        <div class="glass-card" style="padding:24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;transition:transform 0.3s ease,box-shadow 0.3s ease;cursor:pointer;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 32px rgba(241,92,53,0.2)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.1)'">
-          <span style="font-size:3rem;">😊</span>
-          <h3 style="margin:0;font-size:1.2rem;color:var(--text-primary);">Sentiment App</h3>
-          <p style="margin:0;color:var(--text-secondary);line-height:1.6;font-size:0.95rem;">Machine Learning emotion detector — real-time sentiment analysis for text inputs and analytics dashboards.</p>
-        </div>
+        <!-- Card 1: SheSafe -->
+        <a class="proj-card" href="https://shesafe1.netlify.app/" target="_blank" rel="noopener">
+          <img
+            class="proj-thumb"
+            src="https://res.cloudinary.com/dfvudlvl7/image/upload/v1777232319/Screenshot_365_pr7cgk.png"
+            alt="SheSafe app splash screen"
+          >
+          <div class="proj-body">
+            <div class="live-badge"><span class="live-dot"></span> Live</div>
+            <div class="proj-title">SheSafe</div>
+            <p class="proj-desc">
+              A women's health platform that helps you verify the safety of sanitary wear — pads and panty liners — before use. Check ingredients and harmful substances so you can make informed choices about what touches your body. Because your health is non-negotiable.
+            </p>
+            <span class="proj-link">
+              Visit app
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </span>
+          </div>
+        </a>
 
-        <!-- Card 2: Biometric Authentication System -->
-        <div class="glass-card" style="padding:24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;transition:transform 0.3s ease,box-shadow 0.3s ease;cursor:pointer;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 32px rgba(241,92,53,0.2)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.1)'">
-          <span style="font-size:3rem;">🔐</span>
-          <h3 style="margin:0;font-size:1.2rem;color:var(--text-primary);">Biometric Authentication System</h3>
-          <p style="margin:0;color:var(--text-secondary);line-height:1.6;font-size:0.95rem;">Secure identity verification using biometrics and multi-factor authentication.</p>
-        </div>
+        <!-- Card 2: Bulwer Tailor -->
+        <a class="proj-card" href="https://bulwer-tailor-and-laundry.netlify.app/" target="_blank" rel="noopener">
+          <img
+            class="proj-thumb"
+            src="https://res.cloudinary.com/dfvudlvl7/image/upload/v1777233079/Screenshot_362_hnfgna.png"
+            alt="Bulwer Tailor and Laundry app"
+          >
+          <div class="proj-body">
+            <div class="live-badge"><span class="live-dot"></span> Live</div>
+            <div class="proj-title">Bulwer Tailor & Laundry</div>
+            <p class="proj-desc">
+              Precision tailoring and spotless laundry — delivered straight to your door. Book a service, request a home pickup, and track your order online. Your clothes deserve nothing less than perfect.
+            </p>
+            <span class="proj-link">
+              Visit app
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </span>
+          </div>
+        </a>
 
-        <!-- Card 3: Medical Image Classification System -->
-        <div class="glass-card" style="padding:24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;transition:transform 0.3s ease,box-shadow 0.3s ease;cursor:pointer;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 32px rgba(241,92,53,0.2)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.1)'">
-          <span style="font-size:3rem;">🏥</span>
-          <h3 style="margin:0;font-size:1.2rem;color:var(--text-primary);">Medical Image Classification System</h3>
-          <p style="margin:0;color:var(--text-secondary);line-height:1.6;font-size:0.95rem;">AI-assisted diagnostic support using medical image classification models.</p>
-        </div>
+        <!-- Card 3: UniVote -->
+        <a class="proj-card" href="https://uni-vote-c669a.web.app/home" target="_blank" rel="noopener">
+          <img
+            class="proj-thumb"
+            src="https://res.cloudinary.com/dfvudlvl7/image/upload/v1777232361/Screenshot_363_dzss8z.png"
+            alt="UniVote university voting app"
+          >
+          <div class="proj-body">
+            <div class="live-badge"><span class="live-dot"></span> Live</div>
+            <div class="proj-title">UniVote</div>
+            <p class="proj-desc">
+              Skip the line, vote online. A secure digital voting platform built for university elections — transparent, fast, and accessible to every student on campus.
+            </p>
+            <span class="proj-link">
+              Visit app
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </span>
+          </div>
+        </a>
 
-        <!-- Card 4: Predictive Analytics System -->
-        <div class="glass-card" style="padding:24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;transition:transform 0.3s ease,box-shadow 0.3s ease;cursor:pointer;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 32px rgba(241,92,53,0.2)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.1)'">
-          <span style="font-size:3rem;">📊</span>
-          <h3 style="margin:0;font-size:1.2rem;color:var(--text-primary);">Predictive Analytics System</h3>
-          <p style="margin:0;color:var(--text-secondary);line-height:1.6;font-size:0.95rem;">Data-driven forecasting models for business intelligence and planning.</p>
-        </div>
+        <!-- Card 4: AI Chatbot -->
+        <a class="proj-card" href="https://chatbot-eu0c.onrender.com/" target="_blank" rel="noopener">
+          <img
+            class="proj-thumb"
+            src="https://res.cloudinary.com/dfvudlvl7/image/upload/v1777338528/Screenshot_366_lripqo.png"
+            alt="AI Chatbot app"
+          >
+          <div class="proj-body">
+            <div class="live-badge"><span class="live-dot"></span> Live</div>
+            <div class="proj-title">AI Chatbot</div>
+            <p class="proj-desc">
+              An intelligent conversational assistant that handles real-time customer queries and automates support workflows — fast responses, no waiting, available 24/7.
+            </p>
+            <span class="proj-link">
+              Visit app
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </span>
+          </div>
+        </a>
 
-        <!-- Card 5: School Management / Registration System -->
-        <div class="glass-card" style="padding:24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;transition:transform 0.3s ease,box-shadow 0.3s ease;cursor:pointer;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 32px rgba(241,92,53,0.2)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.1)'">
-          <span style="font-size:3rem;">🎓</span>
-          <h3 style="margin:0;font-size:1.2rem;color:var(--text-primary);">School Management / Registration System</h3>
-          <p style="margin:0;color:var(--text-secondary);line-height:1.6;font-size:0.95rem;">Automated academic administration and registration workflows.</p>
-        </div>
-
-        <!-- Card 6: GPS / Mobile Tracking System -->
-        <div class="glass-card" style="padding:24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;transition:transform 0.3s ease,box-shadow 0.3s ease;cursor:pointer;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 32px rgba(241,92,53,0.2)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.1)'">
-          <span style="font-size:3rem;">📍</span>
-          <h3 style="margin:0;font-size:1.2rem;color:var(--text-primary);">GPS / Mobile Tracking System</h3>
-          <p style="margin:0;color:var(--text-secondary);line-height:1.6;font-size:0.95rem;">Real-time location tracking and fleet monitoring solutions.</p>
-        </div>
-
-        <!-- Card 7: AI-Powered Dermatology Diagnostic System -->
-        <div class="glass-card" style="padding:24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;transition:transform 0.3s ease,box-shadow 0.3s ease;cursor:pointer;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 32px rgba(241,92,53,0.2)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.1)'">
-          <span style="font-size:3rem;">🔬</span>
-          <h3 style="margin:0;font-size:1.2rem;color:var(--text-primary);">AI-Powered Dermatology Diagnostic System</h3>
-          <p style="margin:0;color:var(--text-secondary);line-height:1.6;font-size:0.95rem;">Healthcare innovation for dermatology diagnostics using computer vision.</p>
-        </div>
-
-        <!-- Card 8: AI Chatbot -->
-        <div class="glass-card" style="padding:24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;transition:transform 0.3s ease,box-shadow 0.3s ease;cursor:pointer;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 32px rgba(241,92,53,0.2)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.1)'">
-          <span style="font-size:3rem;">🤖</span>
-          <h3 style="margin:0;font-size:1.2rem;color:var(--text-primary);">AI Chatbot</h3>
-          <p style="margin:0;color:var(--text-secondary);line-height:1.6;font-size:0.95rem;">Intelligent automated communication for customer support and workflows.</p>
-        </div>
+        <!-- Card 5: Smart Girlie Calculator -->
+        <a class="proj-card" href="https://smartgirliecalculator.netlify.app/" target="_blank" rel="noopener">
+          <img
+            class="proj-thumb"
+            src="https://res.cloudinary.com/dfvudlvl7/image/upload/v1777469632/Screenshot_369_phltbn.png"
+            alt="Smart Girlie Calculator app"
+          >
+          <div class="proj-body">
+            <div class="live-badge"><span class="live-dot"></span> Live</div>
+            <div class="proj-title">Smart Girlie Calculator</div>
+            <p class="proj-desc">
+              A beautifully designed calculator that proves functionality and aesthetics can coexist. Clean layout, smooth interactions, and a gorgeous look — because your tools should be as beautiful as you are.
+            </p>
+            <span class="proj-link">
+              Visit app
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </span>
+          </div>
+        </a>
 
       </section>
-
     </div>
   </main>
 
-  <!-- PORTFOLIO BOOKMARK: identical to index -->
+  <!-- PORTFOLIO BOOKMARK -->
   <div class="portfolio-bookmark" tabindex="0" aria-haspopup="true" aria-expanded="false">
     <div class="bookmark-icon">
       <img src="https://res.cloudinary.com/dfvudlvl7/image/upload/v1772967107/WhatsApp_Image_2025-10-11_at_11.55.43_tafuog.jpg" alt="Profile">
     </div>
-
     <div class="portfolio-popup" role="dialog" aria-label="Profile summary">
       <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px;">
         <img src="https://res.cloudinary.com/dfvudlvl7/image/upload/v1772967107/WhatsApp_Image_2025-10-11_at_11.55.43_tafuog.jpg" alt="profile" style="width:56px;height:56px;border-radius:50%;object-fit:cover;">
@@ -127,32 +275,26 @@
         </div>
         <svg style="margin-left:auto;color:var(--text-secondary);" viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
-
       <div style="margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.1);">
         <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
           <span class="dot"></span>
           <span style="color:var(--text-secondary);font-size:0.92rem;">Available for Projects</span>
         </div>
         <div style="color:var(--text-secondary);font-size:0.92rem;margin-bottom:12px;">📍 Durban, South Africa</div>
-
         <div style="display:flex;gap:8px;margin-bottom:12px;">
-          <a href="mailto:mhlelilitha@gmail.com" title="Email" style="flex:1;display:flex;align-items:center;justify-content:center;padding:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;text-decoration:none;transition:all 0.3s ease;">
+          <a href="mailto:mhlelilitha@gmail.com" title="Email" style="flex:1;display:flex;align-items:center;justify-content:center;padding:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;text-decoration:none;">
             <span style="font-size:1.15rem;color:#F15C35;">✉️</span>
           </a>
-          <a href="https://linkedin.com/in/lilita-mhle-a61260259/" target="_blank" title="LinkedIn" style="flex:1;display:flex;align-items:center;justify-content:center;padding:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;text-decoration:none;transition:all 0.3s ease;">
+          <a href="https://linkedin.com/in/lilita-mhle-a61260259/" target="_blank" title="LinkedIn" style="flex:1;display:flex;align-items:center;justify-content:center;padding:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;text-decoration:none;">
             <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" fill="#0A66C2" rx="4"/><path d="M7 10.5V18H4V10.5h3zM5.5 8.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3zM20 18h-3v-4.2c0-1-0.4-1.7-1.3-1.7-0.7 0-1.1.5-1.3 1-.1.2-.1.6-.1 1.1V18h-3V10.5h3v1.1c.4-.7 1.1-1.7 2.7-1.7 1.9 0 3.3 1.2 3.3 3.9V18z" fill="#fff"/></svg>
           </a>
-          <a href="https://github.com/LilithaMhle" target="_blank" title="GitHub" style="flex:1;display:flex;align-items:center;justify-content:center;padding:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;text-decoration:none;transition:all 0.3s ease;">
+          <a href="https://github.com/LilithaMhle" target="_blank" title="GitHub" style="flex:1;display:flex;align-items:center;justify-content:center;padding:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;text-decoration:none;">
             <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M12 .5A11.5 11.5 0 001.5 12c0 5.07 3.29 9.36 7.86 10.87.58.11.79-.25.79-.56 0-.27-.01-1-.02-1.96-3.2.7-3.88-1.41-3.88-1.41-.52-1.33-1.27-1.68-1.27-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.25 3.33.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.27-5.24-5.66 0-1.25.45-2.27 1.19-3.07-.12-.29-.51-1.47.11-3.06 0 0 .97-.31 3.17 1.17a11 11 0 015.78 0c2.2-1.48 3.17-1.17 3.17-1.17.62 1.59.23 2.77.11 3.06.74.8 1.19 1.82 1.19 3.07 0 4.4-2.7 5.36-5.27 5.64.41.36.77 1.08.77 2.18 0 1.57-.01 2.84-.01 3.23 0 .31.21.68.8.56A11.5 11.5 0 0012 .5z"/></svg>
           </a>
-          <a href="https://wa.me/27785323540" target="_blank" title="WhatsApp" style="flex:1;display:flex;align-items:center;justify-content:center;padding:6px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;text-decoration:none;transition:all 0.3s ease;">
-            <svg viewBox="0 0 32 32" width="18" height="18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-              <circle cx="16" cy="16" r="15" fill="#25D366"/>
-              <path fill="#ffffff" d="M21.6 18.9c-.34-.17-2.05-1.01-2.36-1.12-.31-.11-.53-.16-.71.16-.18.32-.71 1.03-.86 1.24-.15.21-.3.23-.56.08-.26-.15-1.08-.45-1.8-1.32-.68-.76-1.48-1.69-1.6-1.95-.12-.26-.01-.41.09-.54.1-.12.24-.31.36-.46.12-.15.15-.25.22-.42.07-.16.03-.29-.02-.39-.05-.11-.44-1.28-.6-1.83-.16-.55-.32-.48-.45-.49-.13-.01-.28-.01-.43-.01-.16 0-.39.06-.59.32-.2.26-.77.88-.77 2.13 0 1.25.82 2.48.95 2.66.13.18 1.66 2.43 3.9 3.42.54.23.96.37 1.28.47.54.19 1.05.16 1.45.1.44-.07 1.35-.58 1.54-1.14.19-.56.19-1.04.13-1.14-.06-.1-.22-.16-.46-.28z"/>
-            </svg>
+          <a href="https://wa.me/27785323540" target="_blank" title="WhatsApp" style="flex:1;display:flex;align-items:center;justify-content:center;padding:6px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;text-decoration:none;">
+            <svg viewBox="0 0 32 32" width="18" height="18" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="15" fill="#25D366"/><path fill="#ffffff" d="M21.6 18.9c-.34-.17-2.05-1.01-2.36-1.12-.31-.11-.53-.16-.71.16-.18.32-.71 1.03-.86 1.24-.15.21-.3.23-.56.08-.26-.15-1.08-.45-1.8-1.32-.68-.76-1.48-1.69-1.6-1.95-.12-.26-.01-.41.09-.54.1-.12.24-.31.36-.46.12-.15.15-.25.22-.42.07-.16.03-.29-.02-.39-.05-.11-.44-1.28-.6-1.83-.16-.55-.32-.48-.45-.49-.13-.01-.28-.01-.43-.01-.16 0-.39.06-.59.32-.2.26-.77.88-.77 2.13 0 1.25.82 2.48.95 2.66.13.18 1.66 2.43 3.9 3.42.54.23.96.37 1.28.47.54.19 1.05.16 1.45.1.44-.07 1.35-.58 1.54-1.14.19-.56.19-1.04.13-1.14-.06-.1-.22-.16-.46-.28z"/></svg>
           </a>
         </div>
-
         <a href="contact.html" class="btn btn-primary" style="width:100%;text-align:center;padding:10px;">Create a Project With Me</a>
       </div>
     </div>
@@ -161,13 +303,10 @@
   <!-- FLOATS -->
   <a href="quoteCalculator.html" class="getquote-float" title="Get Quote">Get Quote</a>
   <a href="https://wa.me/27785323540" class="whatsapp-float" target="_blank" title="Let's Chat" aria-label="WhatsApp">
-    <svg viewBox="0 0 32 32" width="32" height="32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-      <circle cx="16" cy="16" r="15" fill="#25D366"/>
-      <path fill="#fff" d="M20.5 18.4c-.49-.24-2.95-1.45-3.38-1.61-.43-.16-.73-.24-.98.25-.25.49-.98 1.57-1.18 1.9-.2.33-.4.36-.78.13-.38-.23-1.6-.63-2.34-1.86-.79-1.35-1.05-2.6-1.17-2.9-.12-.31-.01-.48.11-.61.12-.13.29-.33.44-.49.15-.16.18-.26.27-.43.09-.17.04-.31-.02-.44-.06-.13-.65-1.78-.89-2.42-.24-.63-.47-.55-.66-.56-.19-.01-.42-.01-.66-.01-.24 0-.57.09-.86.48-.29.39-1.07 1.33-1.07 3.23 0 1.9 1.25 3.74 1.38 3.98.13.24 2.18 3.19 5.2 4.46.72.3 1.28.46 1.72.58.73.24 1.42.21 1.96.12.48-.08 1.5-.64 1.71-1.26.21-.62.21-1.15.15-1.26-.06-.11-.22-.18-.45-.31z"/>
-    </svg>
+    <svg viewBox="0 0 32 32" width="32" height="32" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="15" fill="#25D366"/><path fill="#fff" d="M20.5 18.4c-.49-.24-2.95-1.45-3.38-1.61-.43-.16-.73-.24-.98.25-.25.49-.98 1.57-1.18 1.9-.2.33-.4.36-.78.13-.38-.23-1.6-.63-2.34-1.86-.79-1.35-1.05-2.6-1.17-2.9-.12-.31-.01-.48.11-.61.12-.13.29-.33.44-.49.15-.16.18-.26.27-.43.09-.17.04-.31-.02-.44-.06-.13-.65-1.78-.89-2.42-.24-.63-.47-.55-.66-.56-.19-.01-.42-.01-.66-.01-.24 0-.57.09-.86.48-.29.39-1.07 1.33-1.07 3.23 0 1.9 1.25 3.74 1.38 3.98.13.24 2.18 3.19 5.2 4.46.72.3 1.28.46 1.72.58.73.24 1.42.21 1.96.12.48-.08 1.5-.64 1.71-1.26.21-.62.21-1.15.15-1.26-.06-.11-.22-.18-.45-.31z"/></svg>
   </a>
 
-  <!-- FOOTER: identical to index -->
+  <!-- FOOTER -->
   <footer class="site-footer" role="contentinfo">
     <div class="footer-inner">
       <div class="footer-brand">
@@ -178,23 +317,11 @@
             <div class="tagline">where curiosity meets code &lt;&gt;</div>
           </div>
         </div>
-
         <div class="footer-socials" aria-label="Social links">
-          <a href="mailto:mhlelilitha@gmail.com" title="Email">
-            <span style="font-size:1.1rem;color:#F15C35;">✉️</span>
-          </a>
-          <a href="https://linkedin.com/in/lilita-mhle-a61260259/" target="_blank" title="LinkedIn">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" fill="#0A66C2" rx="4"/><path d="M7 10.5V18H4V10.5h3zM5.5 8.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3zM20 18h-3v-4.2c0-1-0.4-1.7-1.3-1.7-0.7 0-1.1.5-1.3 1-.1.2-.1.6-.1 1.1V18h-3V10.5h3v1.1c.4-.7 1.1-1.7 2.7-1.7 1.9 0 3.3 1.2 3.3 3.9V18z" fill="#fff"/></svg>
-          </a>
-          <a href="https://github.com/LilithaMhle" target="_blank" title="GitHub">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M12 .5A11.5 11.5 0 001.5 12c0 5.07 3.29 9.36 7.86 10.87.58.11.79-.25.79-.56 0-.27-.01-1-.02-1.96-3.2.7-3.88-1.41-3.88-1.41-.52-1.33-1.27-1.68-1.27-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.25 3.33.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.27-5.24-5.66 0-1.25.45-2.27 1.19-3.07-.12-.29-.51-1.47.11-3.06 0 0 .97-.31 3.17 1.17a11 11 0 015.78 0c2.2-1.48 3.17-1.17 3.17-1.17.62 1.59.23 2.77.11 3.06.74.8 1.19 1.82 1.19 3.07 0 4.4-2.7 5.36-5.27 5.64.41.36.77 1.08.77 2.18 0 1.57-.01 2.84-.01 3.23 0 .31.21.68.8.56A11.5 11.5 0 0012 .5z"/></svg>
-          </a>
-          <a href="https://wa.me/27785323540" target="_blank" title="WhatsApp">
-            <svg viewBox="0 0 32 32" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-              <circle cx="16" cy="16" r="15" fill="#25D366"/>
-              <path fill="#fff" d="M20.5 18.4c-.49-.24-2.95-1.45-3.38-1.61-.43-.16-.73-.24-.98.25-.25.49-.98 1.57-1.18 1.9-.2.33-.4.36-.78.13-.38-.23-1.6-.63-2.34-1.86-.79-1.35-1.05-2.6-1.17-2.9-.12-.31-.01-.48.11-.61.12-.13.29-.33.44-.49.15-.16.18-.26.27-.43.09-.17.04-.31-.02-.44-.06-.13-.65-1.78-.89-2.42-.24-.63-.47-.55-.66-.56-.19-.01-.42-.01-.66-.01-.24 0-.57.09-.86.48-.29.39-1.07 1.33-1.07 3.23 0 1.9 1.25 3.74 1.38 3.98.13.24 2.18 3.19 5.2 4.46.72.3 1.28.46 1.72.58.73.24 1.42.21 1.96.12.48-.08 1.5-.64 1.71-1.26.21-.62.21-1.15.15-1.26-.06-.11-.22-.18-.45-.31z"/>
-            </svg>
-          </a>
+          <a href="mailto:mhlelilitha@gmail.com" title="Email"><span style="font-size:1.1rem;color:#F15C35;">✉️</span></a>
+          <a href="https://linkedin.com/in/lilita-mhle-a61260259/" target="_blank" title="LinkedIn"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" fill="#0A66C2" rx="4"/><path d="M7 10.5V18H4V10.5h3zM5.5 8.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3zM20 18h-3v-4.2c0-1-0.4-1.7-1.3-1.7-0.7 0-1.1.5-1.3 1-.1.2-.1.6-.1 1.1V18h-3V10.5h3v1.1c.4-.7 1.1-1.7 2.7-1.7 1.9 0 3.3 1.2 3.3 3.9V18z" fill="#fff"/></svg></a>
+          <a href="https://github.com/LilithaMhle" target="_blank" title="GitHub"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M12 .5A11.5 11.5 0 001.5 12c0 5.07 3.29 9.36 7.86 10.87.58.11.79-.25.79-.56 0-.27-.01-1-.02-1.96-3.2.7-3.88-1.41-3.88-1.41-.52-1.33-1.27-1.68-1.27-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.25 3.33.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.27-5.24-5.66 0-1.25.45-2.27 1.19-3.07-.12-.29-.51-1.47.11-3.06 0 0 .97-.31 3.17 1.17a11 11 0 015.78 0c2.2-1.48 3.17-1.17 3.17-1.17.62 1.59.23 2.77.11 3.06.74.8 1.19 1.82 1.19 3.07 0 4.4-2.7 5.36-5.27 5.64.41.36.77 1.08.77 2.18 0 1.57-.01 2.84-.01 3.23 0 .31.21.68.8.56A11.5 11.5 0 0012 .5z"/></svg></a>
+          <a href="https://wa.me/27785323540" target="_blank" title="WhatsApp"><svg viewBox="0 0 32 32" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="15" fill="#25D366"/><path fill="#fff" d="M20.5 18.4c-.49-.24-2.95-1.45-3.38-1.61-.43-.16-.73-.24-.98.25-.25.49-.98 1.57-1.18 1.9-.2.33-.4.36-.78.13-.38-.23-1.6-.63-2.34-1.86-.79-1.35-1.05-2.6-1.17-2.9-.12-.31-.01-.48.11-.61.12-.13.29-.33.44-.49.15-.16.18-.26.27-.43.09-.17.04-.31-.02-.44-.06-.13-.65-1.78-.89-2.42-.24-.63-.47-.55-.66-.56-.19-.01-.42-.01-.66-.01-.24 0-.57.09-.86.48-.29.39-1.07 1.33-1.07 3.23 0 1.9 1.25 3.74 1.38 3.98.13.24 2.18 3.19 5.2 4.46.72.3 1.28.46 1.72.58.73.24 1.42.21 1.96.12.48-.08 1.5-.64 1.71-1.26.21-.62.21-1.15.15-1.26-.06-.11-.22-.18-.45-.31z"/></svg></a>
         </div>
       </div>
 
